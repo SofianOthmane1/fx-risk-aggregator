@@ -1,5 +1,10 @@
 """
-Unit tests for the PortfolioAggregator.
+This is the unit tests for the PortfolioAggregator.
+
+By giving aggregation its own test suite, we make failures here obvious.
+If someone upstream changes column names, or adds new metrics, or passes
+non-USD values by mistake, these tests will break immediately — which is what
+we want. It's a guardrail to ensure the reporting layer stays predictable.
 """
 import pandas as pd
 from src.aggregator import PortfolioAggregator
@@ -30,6 +35,10 @@ def test_calculate_portfolio_totals():
 def test_group_risk_by_currency():
     """
     Test grouping logic by Currency.
+    
+    Desks might want to know not just "risk by pair" but "risk by funding currency".
+    This function groups by the Currency column (quote currency) and sums only
+    USD-normalised PV/Delta/Vega.
     """
     data = [
         {"Status": "Success", "Currency": "USD", "PV_USD": 100.0, "Delta_USD": 50.0, "Vega_USD": 0.0},

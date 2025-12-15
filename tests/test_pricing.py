@@ -1,6 +1,6 @@
 """
 Unit tests for the Black-Scholes Math Engine.
-Verifies pricing logic, Greeks, and Currency Normalization.
+Verifies pricing logic, Greeks, and Currency Normalisation.
 """
 import pytest
 from pydantic import ValidationError

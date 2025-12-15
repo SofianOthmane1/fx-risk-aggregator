@@ -6,7 +6,7 @@ import pytest
 from pydantic import ValidationError
 from src.models import FXOptionTrade
 
-# A baseline trade to start all tests with
+# Baseline valid trade used as a clean starting point for all tests.
 VALID_DATA = {
     "TradeID": "T1",
     "Underlying": "EUR/USD",
@@ -29,7 +29,10 @@ def test_valid_trade_creation():
     assert trade.volatility == 0.20
 
 def test_invalid_pair_format():
-    """Test Regex: Pair must be 'XXX/XXX'."""
+    """
+    Test Regex: 
+    FX pairs must follow the standard 'XXX/YYY' format.
+    """
     bad_data = VALID_DATA.copy()
     bad_data["Underlying"] = "EURUSD" # Missing slash
     
